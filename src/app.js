@@ -34,7 +34,13 @@ const connectToDatabase = async () => {
   }
 };
 
+const PORT = process.env.PORT || 3000;
 
+// Start the server and connect to the database
+
+app.listen(PORT, () => {
+  console.log(`Server running on http://localhost:${PORT}`);
+});
 
 
 

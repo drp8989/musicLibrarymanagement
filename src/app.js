@@ -8,7 +8,7 @@ const trackRoutes=require('../routes/v1/trackRoutes');
 const favoriteRoutes=require('../routes/v1/favoriteRoutes');
 const authRoutes=require('../routes/v1/authenticationRoutes');
 
-
+const User=require('../models/user');
 
 
 

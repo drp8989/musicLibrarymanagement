@@ -10,6 +10,54 @@ const authRoutes=require('../routes/v1/authenticationRoutes');
 
 
 
+
+
+const mongoose = require('mongoose');
+
+// Get MongoDB URI from environment variables
+const uri = process.env.MONGODB_URI;
+
+// Options to avoid deprecation warnings
+const options = {
+  useNewUrlParser: true,
+  serverSelectionTimeoutMS: 5000, // Timeout after 5 seconds
+};
+
+// Connect to MongoDB using Mongoose
+const connectToDatabase = async () => {
+  try {
+    await mongoose.connect(uri, options);
+    console.log('Connected to the database.');
+  } catch (error) {
+    console.error('Error connecting to the database:', error);
+    throw error;
+  }
+};
+
+
+
+
+
+connectToDatabase();
+// Run the function
+async function createDefaultAdmin() {
+  const userCount = await User.countDocuments();
+  if (userCount === 0) {
+      const defaultAdmin = new User({
+          user_id: uuidv4(), // Generate a new UUID for user_id
+          email: 'admin@admin.com',
+          password: await bcrypt.hash('admin', 10), // This should be hashed
+          role: 'Admin',
+      });
+      await defaultAdmin.save();
+  }
+}
+
+// Call the function when the application starts or during the initialization phase
+createDefaultAdmin();
+
+
+
 // Middleware
 app.use(express.json());
 app.use(bodyParser.json());

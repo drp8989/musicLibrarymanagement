@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
+const cookieParser = require('cookie-parser');
 const userRoutes=require("../routes/v1/userRoutes");
 const artistRoutes=require("../routes/v1/artistRoutes");
 const albumRoutes=require('../routes/v1/albumRoutes');
@@ -67,6 +68,7 @@ createDefaultAdmin();
 // Middleware
 app.use(express.json());
 app.use(bodyParser.json());
+app.use(cookieParser());
 
 //Use the user routes
 app.use("/api/v1",userRoutes);

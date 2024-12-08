@@ -90,6 +90,14 @@ exports.login = async (req, res) => {
       expiresIn: '1h',
     });
     
+    res.cookie('jwt', token, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production', // Use secure cookies in production
+      sameSite: 'strict', // Helps mitigate CSRF
+      maxAge: 3600000, // 1 hour
+    });
+
+
     res.status(200).json({ token });
   } catch (err) {
     
@@ -99,15 +107,11 @@ exports.login = async (req, res) => {
 };
 
 exports.logout=async(req,res)=>{
-  try {
-
-    res.setHeader('Authorization', '');
-    // Redirect to the login page after logout
-    return res.status(200).json("Logged out succesfully")
-  } catch (error) {
-    console.error('Error during logout:', error);
-    res.status(500).send('Internal server error');
-  }
+  res.clearCookie('jwt', {
+    httpOnly: true,
+    sameSite: 'strict',
+  });
+  res.json({ message: 'Logout successful' });
 }
 
 

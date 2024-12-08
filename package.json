@@ -2,10 +2,9 @@
   "name": "musiclibrarymanagement",
   "version": "1.0.0",
   "description": "Demo Project",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
-    "start": "node src/app.js",
-    "build": "webpack --config webpack.config.js"
+    "start": "node src/app.js"
   },
   "author": "Darshan Pahilwani",
   "license": "ISC",
@@ -24,8 +23,6 @@
     "@babel/core": "^7.26.0",
     "@babel/preset-env": "^7.26.0",
     "babel-loader": "^9.2.1",
-    "nodemon": "^3.1.7",
-    "webpack": "^5.97.1",
-    "webpack-cli": "^5.1.4"
+    "nodemon": "^3.1.7"
   }
 }
